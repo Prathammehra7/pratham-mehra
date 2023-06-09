@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/c294c3640e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="new.css">
+</head>
+
+<body>
+    <div class="main_container">
+        <div class="head">
+            <h4>
+                container-1
+            </h4>
+            <h4>
+                container-2
+            </h4>
+        </div>
+
+        <div class="main_item">
+
+            <div class="container" id="container1">
+                <p class="draggable" draggable="true">This is a text</p>
+                <p class="draggable" draggable="true"><i class="fa-solid fa-thumbs-up"></i><i
+                        class="fa-solid fa-thumbs-up"></i>
+                </p>
+                <p class="draggable" draggable="true">
+                    <img src="" alt="">
+                </p>
+            </div>
+
+            <div class="container" id="container2"></div>
+
+            <button class="clear-button" onclick="clearItems()">Clear Items</button>
+        </div>
+
+    </div>
+
+
+    <script>
+        const draggables = document.querySelectorAll('.draggable')
+        const containers = document.querySelectorAll('.container')
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggable.classList.add('dragging') // Adding the items to other containers
+                console.log("drop item successfully")
+            })
+
+            draggable.addEventListener('dragend', () => {
+                draggable.classList.remove('dragging')    // removing the items to other containers
+            })
+        })
+
+        containers.forEach(container => {
+            container.addEventListener('dragover', e => {
+                e.preventDefault()  // this is change our cursor to drop the items
+                const draggable = document.querySelector('.dragging')
+                container.appendChild(draggable)
+
+            })
+        })
+
+
+        // clear the second container items
+        function clearItems() {
+            var container2 = document.getElementById("container2");
+            while (container2.firstChild) {
+                container2.removeChild(container2.firstChild);
+                console.log("Clear item successfully")
+            }
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
